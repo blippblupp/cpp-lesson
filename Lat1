@@ -1,0 +1,74 @@
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+int main() {
+    string nama;
+    double tugas, uts, uas, nilaiAkhir;
+    char huruf;
+    string status;
+
+    cout << "Nama Mahasiswa: ";
+    getline(cin, nama);
+
+    // Validasi nilai tugas
+    do {
+        cout << "Nilai Tugas: ";
+        cin >> tugas;
+
+        if (tugas < 0 || tugas > 100) {
+            cout << "Nilai harus 0-100!\n";
+        }
+    } while (tugas < 0 || tugas > 100);
+
+    // Validasi nilai UTS
+    do {
+        cout << "Nilai UTS: ";
+        cin >> uts;
+
+        if (uts < 0 || uts > 100) {
+            cout << "Nilai harus 0-100!\n";
+        }
+    } while (uts < 0 || uts > 100);
+
+    // Validasi nilai UAS
+    do {
+        cout << "Nilai UAS: ";
+        cin >> uas;
+
+        if (uas < 0 || uas > 100) {
+            cout << "Nilai harus 0-100!\n";
+        }
+    } while (uas < 0 || uas > 100);
+
+    nilaiAkhir = (tugas * 0.20) +
+                 (uts * 0.30) +
+                 (uas * 0.50);
+
+    if (nilaiAkhir >= 85) {
+        huruf = 'A';
+    } else if (nilaiAkhir >= 70) {
+        huruf = 'B';
+    } else if (nilaiAkhir >= 55) {
+        huruf = 'C';
+    } else {
+        huruf = 'D';
+    }
+
+    if (nilaiAkhir >= 60) {
+        status = "LULUS";
+    } else {
+        status = "TIDAK LULUS";
+    }
+
+    cout << "\n===== HASIL PENILAIAN =====\n";
+    cout << "Nama        : " << nama << endl;
+    cout << fixed << setprecision(2);
+    cout << "Nilai Akhir : " << nilaiAkhir << endl;
+    cout << "Nilai Huruf : " << huruf << endl;
+    cout << "Status      : " << status << endl;
+
+    return 0;
+}
