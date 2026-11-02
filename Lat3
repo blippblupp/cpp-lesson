@@ -1,0 +1,106 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int stokAwal = 30;
+    int stok = 30;
+    int harga = 12000;
+
+    int totalTerjual = 0;
+    int totalRestock = 0;
+    int pendapatan = 0;
+
+    int menu;
+    int jumlah;
+
+    do {
+        cout << "\n===== SISTEM STOK TOKO =====\n";
+        cout << "1. Catat Penjualan\n";
+        cout << "2. Lihat Laporan Stok\n";
+        cout << "3. Restock Barang\n";
+        cout << "0. Keluar\n";
+        cout << "Pilih Menu: ";
+        cin >> menu;
+
+        switch (menu) {
+            case 1:
+                if (stok == 0) {
+                    cout << "Stok habis! Lakukan restock.\n";
+                    break;
+                }
+
+                while (stok > 0) {
+                    cout << "\nJumlah Terjual: ";
+                    cin >> jumlah;
+
+                    if (jumlah == 0) {
+                        break;
+                    }
+
+                    if (jumlah < 0 || jumlah > stok) {
+                        cout << "Jumlah tidak valid!\n";
+                        continue;
+                    }
+
+                    stok -= jumlah;
+                    totalTerjual += jumlah;
+                    pendapatan += jumlah * harga;
+
+                    cout << "Sisa Stok: " << stok << endl;
+
+                    if (stok == 0) {
+                        cout << "Stok Habis!\n";
+                        break;
+                    } else if (stok <= 9) {
+                        cout << "Stok Menipis!\n";
+                    }
+                }
+                break;
+
+            case 2:
+                cout << "\n======= LAPORAN STOK =======\n";
+                cout << "Stok Awal     : " << stokAwal << endl;
+                cout << "Total Terjual : " << totalTerjual << endl;
+                cout << "Total Restock : " << totalRestock << endl;
+                cout << "Sisa Stok     : " << stok << endl;
+                cout << "Pendapatan    : Rp" << pendapatan << endl;
+
+                if (stok >= 10) {
+                    cout << "Status        : AMAN\n";
+                } else if (stok >= 1) {
+                    cout << "Status        : MENIPIS\n";
+                } else {
+                    cout << "Status        : HABIS\n";
+                }
+                break;
+
+            case 3:
+                do {
+                    cout << "Jumlah Restock: ";
+                    cin >> jumlah;
+
+                    if (jumlah <= 0) {
+                        cout << "Restock harus lebih dari 0!\n";
+                    }
+                } while (jumlah <= 0);
+
+                stok += jumlah;
+                totalRestock += jumlah;
+
+                cout << "Restock berhasil!\n";
+                cout << "Stok sekarang: " << stok << endl;
+                break;
+
+            case 0:
+                cout << "Program selesai.\n";
+                break;
+
+            default:
+                cout << "Menu tidak valid!\n";
+        }
+
+    } while (menu != 0);
+
+    return 0;
+}
