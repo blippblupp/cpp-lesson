@@ -1,0 +1,72 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int jumlahBaris;
+    int kode, jumlah, harga;
+    int totalBarang = 0;
+    int totalSebelumDiskon = 0;
+    int diskon = 0;
+    int totalBayar = 0;
+
+    cout << "Jumlah Baris Pesanan: ";
+    cin >> jumlahBaris;
+
+    for (int i = 1; i <= jumlahBaris; i++) {
+        cout << "\nPesanan " << i << endl;
+
+        cout << "Kode Produk: ";
+        cin >> kode;
+
+        cout << "Jumlah: ";
+        cin >> jumlah;
+
+        // Validasi pesanan
+        if (kode < 1 || kode > 4 || jumlah < 1) {
+            cout << "Pesanan tidak valid!\n";
+            continue;
+        }
+
+        // Menentukan harga
+        switch (kode) {
+            case 1:
+                harga = 15000;
+                break;
+            case 2:
+                harga = 12000;
+                break;
+            case 3:
+                harga = 5000;
+                break;
+            case 4:
+                harga = 8000;
+                break;
+        }
+
+        int subtotal = harga * jumlah;
+
+        totalBarang += jumlah;
+        totalSebelumDiskon += subtotal;
+
+        cout << "Subtotal: Rp" << subtotal << endl;
+    }
+
+    // Menghitung diskon
+    if (totalSebelumDiskon >= 100000) {
+        diskon = totalSebelumDiskon * 10 / 100;
+    }
+
+    totalBayar = totalSebelumDiskon - diskon;
+
+    cout << "\n===== STRUK BELANJA =====\n";
+    cout << "Total Barang        : " << totalBarang << endl;
+    cout << "Total Sebelum Diskon: Rp"
+         << totalSebelumDiskon << endl;
+    cout << "Diskon              : Rp"
+         << diskon << endl;
+    cout << "Total Bayar         : Rp"
+         << totalBayar << endl;
+
+    return 0;
+}
